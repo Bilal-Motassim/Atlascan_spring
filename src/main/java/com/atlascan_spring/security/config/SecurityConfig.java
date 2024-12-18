@@ -70,7 +70,6 @@ public class SecurityConfig {
                                 "/api/auth/normal-login",
                                 "/api/auth/register"
 
-
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
