@@ -76,9 +76,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         logger.debug("SecurityContext set with user: {}, email: {}, provider: {}", username, email, authProvider);
     }
-
-
-
     private String extractJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
@@ -91,7 +88,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
-        return path.startsWith("/oauth2") || path.startsWith("/login/oauth2") || path.startsWith("/swagger");
+        return path.startsWith("/oauth2")
+                || path.startsWith("/login/oauth2")
+                || path.startsWith("/swagger-ui")
+                || path.startsWith("/v3/api-docs");
     }
-
 }

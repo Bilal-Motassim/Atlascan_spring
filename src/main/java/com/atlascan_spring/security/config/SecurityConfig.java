@@ -65,7 +65,10 @@ public class SecurityConfig {
                                 "/oauth2/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
-                                "/login/**"
+                                "/login/**",
+                                "/actuator/**",
+                                "/api/auth/normal-login",
+                                "/api/auth/register"
 
 
                         ).permitAll()
