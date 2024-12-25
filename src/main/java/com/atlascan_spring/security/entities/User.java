@@ -1,21 +1,18 @@
 package com.atlascan_spring.security.entities;
 
-
+import com.atlascan_spring.idcardservice.entity.ExtractedData;
 import com.atlascan_spring.security.enums.AuthProvider;
 import com.atlascan_spring.security.enums.Role;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
 
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
     private String email;
     private String password;
@@ -23,7 +20,6 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private UserProfile profile;
-
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -33,7 +29,11 @@ public class User {
     @Column(nullable = false)
     private AuthProvider authProvider;
 
-    public User(Long id, String username, String email, String password, UserProfile profile, Role role, AuthProvider authProvider) {
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idcard_id", referencedColumnName = "id")
+    private ExtractedData idcard;
+
+    public User(Long id, String username, String email, String password, UserProfile profile, Role role, AuthProvider authProvider, ExtractedData idcard) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -41,8 +41,10 @@ public class User {
         this.profile = profile;
         this.role = role;
         this.authProvider = authProvider;
+        this.idcard = idcard;
     }
 
+    // Default constructor
     public User() {}
 
     public Long getId() {
@@ -100,5 +102,12 @@ public class User {
     public void setAuthProvider(AuthProvider authProvider) {
         this.authProvider = authProvider;
     }
-}
 
+    public ExtractedData getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(ExtractedData idcard) {
+        this.idcard = idcard;
+    }
+}
