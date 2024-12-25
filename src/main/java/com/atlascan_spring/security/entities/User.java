@@ -29,11 +29,8 @@ public class User {
     @Column(nullable = false)
     private AuthProvider authProvider;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "idcard_id", referencedColumnName = "id")
-    private ExtractedData idcard;
 
-    public User(Long id, String username, String email, String password, UserProfile profile, Role role, AuthProvider authProvider, ExtractedData idcard) {
+    public User(Long id, String username, String email, String password, UserProfile profile, Role role, AuthProvider authProvider) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -41,7 +38,6 @@ public class User {
         this.profile = profile;
         this.role = role;
         this.authProvider = authProvider;
-        this.idcard = idcard;
     }
 
     // Default constructor
@@ -103,11 +99,4 @@ public class User {
         this.authProvider = authProvider;
     }
 
-    public ExtractedData getIdcard() {
-        return idcard;
-    }
-
-    public void setIdcard(ExtractedData idcard) {
-        this.idcard = idcard;
-    }
 }

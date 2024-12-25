@@ -16,8 +16,6 @@ public class ExtractedData {
     private String frenchData;
 
 
-    @OneToOne(mappedBy = "idcard", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private User user;
 
     public ExtractedData() {
     }

@@ -68,7 +68,8 @@ public class SecurityConfig {
                                 "/login/**",
                                 "/actuator/**",
                                 "/api/auth/normal-login",
-                                "/api/auth/register"
+                                "/api/auth/register",
+                                "/api/id-card-info/**"
 
                         ).permitAll()
                         .anyRequest().authenticated()
