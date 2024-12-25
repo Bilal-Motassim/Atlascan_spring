@@ -8,7 +8,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface ExtractedDataRepository extends JpaRepository<ExtractedData, Long> {
-
-    @Query("SELECT e FROM ExtractedData e WHERE e.user.email = :email")
-    Optional<ExtractedData> findByUserEmail(@Param("email") String email);
+    
 }

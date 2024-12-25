@@ -16,14 +16,14 @@ public class ExtractedDataController {
     private ExtractedDataService service;
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveExtractedData(@RequestBody ExtractedData data, @RequestParam String userEmail) {
-        ExtractedData savedData = service.saveExtractedData(data, userEmail);
+    public ResponseEntity<?> saveExtractedData(@RequestBody ExtractedData data) {
+        ExtractedData savedData = service.saveExtractedData(data);
         return ResponseEntity.ok(savedData);
     }
 
     @GetMapping("/extract/{id}")
-    public ResponseEntity<?> getExtractedData(@PathVariable String  userEmail) {
-        Optional<ExtractedData> data = service.getExtractedDataByUserEmail(userEmail);
+    public ResponseEntity<?> getExtractedData(@PathVariable Long  id) {
+        Optional<ExtractedData> data = service.getExtractedDataById(id);
         if (data.isPresent()) {
             return ResponseEntity.ok(data.get());
         }

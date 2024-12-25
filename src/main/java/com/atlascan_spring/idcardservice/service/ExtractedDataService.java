@@ -14,17 +14,11 @@ public class ExtractedDataService {
 
     @Autowired
     private ExtractedDataRepository repository;
-    @Autowired
-    private UserService userService;
 
-    public ExtractedData saveExtractedData(ExtractedData data, String userEmail) {
-        repository.save(data);
-        User user = userService.getUserIdByEmail(userEmail);
-        user.setIdcard(data);
-        userService.save(user);
+    public ExtractedData saveExtractedData(ExtractedData data) {
         return repository.save(data);
     }
-    public Optional<ExtractedData> getExtractedDataByUserEmail(String email) {
-        return repository.findByUserEmail(email);
+    public Optional<ExtractedData> getExtractedDataById(Long id) {
+        return repository.findById(id);
     }
 }
